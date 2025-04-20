@@ -4,9 +4,14 @@
   border: 1px solid black;
 }
 
+.app {
+  background-color: grey;
+}
+
 .logo {
-    width: 200px;
-    height: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
   }
   
   .nav-items > ul{
