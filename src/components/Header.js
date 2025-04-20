@@ -1,11 +1,11 @@
 
-import {LOGO_URL} from "../utils/constants";
+import { LOGO_URL } from "../utils/constants";
 
-const Header = () =>{
-    return(
+const Header = () => {
+    return (
         <div className="header">
             <div className="logo-container">
-                 <img className="logo" src={LOGO_URL} alt="logo" />
+                <img className="logo" src={LOGO_URL} alt="logo" />
             </div>
             <div className="nav-items" >
                 <ul>
@@ -15,9 +15,9 @@ const Header = () =>{
                     <li>Cart</li>
                 </ul>
             </div>
-            
+
         </div>
     )
-}; 
-  
+};
+
 export default Header;
