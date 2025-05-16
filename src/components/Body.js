@@ -1,46 +1,31 @@
 import ResturantCard from "./ResturantCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
 
 
-    const [listOfResturants, setListOfResturant] = useState([
-        {
-            data: {
-                id: "334455",
-                name: "KFC",
-                cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
-                cuisines: ["Burgers", "Biryani", "American", "Snacks"],
-                costForTwo: 40000,
-                deliveryTime: 36,
-                avgRating: "3.8",
-            },
-        },
-        {
-            data: {
-                id: "334466",
-                name: "MCD",
-                cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
-                cuisines: ["Burgers", "Biryani", "American", "Snacks"],
-                costForTwo: 40000,
-                deliveryTime: 36,
-                avgRating: "4.5",
-            },
-        },
-        {
-            data: {
-                id: "334477",
-                name: "ABC",
-                cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
-                cuisines: ["Burgers", "Biryani", "American", "Snacks"],
-                costForTwo: 40000,
-                deliveryTime: 36,
-                avgRating: "4.5",
-            },
-        },
-    ]);
+    const [listOfResturants, setListOfResturant] = useState([]);
 
-    return (
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async function () {
+        const data = await fetch(
+            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.5726&lng=88.3639&page_type=DESKTOP_WEB_LISTING"
+        );
+
+        const json = await data.json();
+        console.log(json);
+        setListOfResturant(json?.data?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.resturants);
+    };
+
+    // if(listOfResturants.length === 0){
+    //     return <Shimmer/>
+    // }
+
+    return (listOfResturants.length === 0) ? <Shimmer /> : (
         <div className="body">
             <div className="filter">
                 <button className="filter-btn" onClick={() => {
@@ -54,8 +39,8 @@ const Body = () => {
             </div>
             <div className="res-container">
                 {
-                    listOfResturants.map((resturant) => (
-                        <ResturantCard key={resturant.data.id} resData={resturant} />
+                    listOfResturants?.map((resturant, index) => (
+                        <ResturantCard key={index} resData={resturant} />
                     ))
                 }
             </div>
