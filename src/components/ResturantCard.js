@@ -7,13 +7,14 @@ const ResturantCard = (props) => {
         cuisines, 
         costForTwo, 
         deliveryTime, 
-        avgRating
+        avgRating,
+        cloudinaryImageId
     } = resData.data || resData;
 
     return (
         <div className="res-card">
-            <img className="res-logo" src={CDN_URL} />
-             <h3>{name || "Restaurant Name"}</h3>
+            <img className="res-logo" src={CDN_URL+cloudinaryImageId} />
+             <h3>{name }</h3>
             <h4>{cuisines ? cuisines.join(", ") : ""}</h4>
             <h4>₹{costForTwo ? costForTwo/100 : ""} for two</h4>
             <h4>{deliveryTime || ""} minutes</h4>
