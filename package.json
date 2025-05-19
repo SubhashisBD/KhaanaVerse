@@ -1,6 +1,7 @@
 {
   "name": "bd-kitchen",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html --public-url ./",
@@ -20,10 +21,12 @@
   },
   "homepage": "https://github.com/SubhashisBD/BhanjDeo-Kitchen#readme",
   "devDependencies": {
-    "parcel": "^2.14.4"
+    "parcel": "^2.15.1"
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router": "^6.22.3",
+    "react-router-dom": "^6.22.3"
   }
 }
