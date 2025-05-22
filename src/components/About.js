@@ -1,8 +1,12 @@
+import User from "./User";
+import UserClass from "./UserClass";
+
 const About = () =>{
     return (
         <div>
             <h1>About</h1>
-            <h2>This is a Section under about!</h2>
+            <User />
+            <UserClass name ={"abc"}/>
         </div>
     )
 }
