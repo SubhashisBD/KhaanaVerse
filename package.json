@@ -21,12 +21,17 @@
   },
   "homepage": "https://github.com/SubhashisBD/BhanjDeo-Kitchen#readme",
   "devDependencies": {
-    "parcel": "^2.15.1"
+    "autoprefixer": "^10.4.21",
+    "parcel": "^2.15.1",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router": "^6.22.3",
     "react-router-dom": "^6.22.3"
-  }
+  },
+  "description": "/**\r  * *Header\r  *  -Logo\r  *  -Navbar\r  * *Body\r  *  -SearchBar\r  *  -RestaurantContainer\r  *    - RestaurantCard\r  * *Footer\r  *  -Copyright\r  * -Links\r  * -Address\r  * -Contact\r  */"
+  
 }
