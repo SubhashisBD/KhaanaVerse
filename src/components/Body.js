@@ -27,25 +27,25 @@ const Body = () => {
         )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         setListOfRestaurant(restaurant);
         setFillterdRestaurant(restaurant);
- };
-        const OnlineStatus = useOnlineStatus();
-        if (OnlineStatus === false)
-            return (
-                <h1>Please Connect Your Internet</h1>
-            );
+    };
+    const OnlineStatus = useOnlineStatus();
+    if (OnlineStatus === false)
+        return (
+            <h1>Please Connect Your Internet</h1>
+        );
 
-   
+
 
     return (listOfResturants.length === 0) ? <Shimmer /> : (
-        <div className="body">
-            <div className="filter">
-                <div className="search">
-                    <input type="text" className="search-box" value={searchText}
+        <div className="body bg-[#fbf7e4]">
+            <div className="filter flex">
+                <div className=" m-4 p-4 space-x-5">
+                    <input type="text" className="border-2 border-solid border-black" value={searchText}
                         onChange={(e) => {
                             setSearchText(e.target.value)
                         }}
                     />
-                    <button onClick={() => {
+                    <button className="px-4 py-1.5 bg-[#4ADE80] hover:bg-[#22C55E] text-white font-semibold rounded-md shadow-lg" onClick={() => {
                         const filterdRestaurant = listOfResturants.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()));
 
                         setFillterdRestaurant(filterdRestaurant);
@@ -56,16 +56,19 @@ const Body = () => {
                     >Search</button>
                 </div>
 
-                <button className="filter-btn" onClick={() => {
-                    const filteredList = listOfResturants.filter((res) => res.info.avgRating > 4.5);
-                    setListOfRestaurant(filteredList);
-                    setFillterdRestaurant(filteredList);
-                }
-                }
-                >
-                    Top Rated Resturant</button>
+                <div className="m-4 p-4 flex items-center">
+                    <button className="px-3 py-1.5 bg-[#4ADE80] hover:bg-[#22C55E] text-white font-semibold rounded-md shadow-lg" onClick={() => {
+                        const filteredList = listOfResturants.filter((res) => res.info.avgRating > 4.5);
+                        setListOfRestaurant(filteredList);
+                        setFillterdRestaurant(filteredList);
+                    }
+                    }
+                    >
+                        Top Rated Resturant</button>
+                </div>
+
             </div>
-            <div className="res-container">
+            <div className="flex flex-wrap">
                 {
                     fillterdRestaurant?.map((restaurant) => (
                         <Link key={restaurant?.info.id} to={"/restaurants/" + restaurant?.info.id}><ResturantCard resData={restaurant?.info} /></Link>
