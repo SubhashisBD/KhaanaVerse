@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-
 const useRestaurantMenu = (resId) => {
 
     const [resInfo, setResInfo] = useState(null);
