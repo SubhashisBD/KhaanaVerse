@@ -1,8 +1,9 @@
-import ResturantCard from "./ResturantCard";
+import ResturantCard, { withPromotedLabel } from "./ResturantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { SWIGGY_MAIN } from "../utils/constants";
 
 const Body = () => {
 
@@ -11,20 +12,19 @@ const Body = () => {
 
     const [searchText, setSearchText] = useState("");
 
+    const RestuarantCardPromoted = withPromotedLabel(ResturantCard);
 
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = async function () {
-        const data = await fetch(
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.5743545&lng=88.3628734&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-        );
-
+        const data = await fetch(SWIGGY_MAIN);
         const json = await data.json();
         let restaurant = json?.data?.cards.find(
             (c) => c?.card?.card?.gridElements?.infoWithStyle?.restaurants
         )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
         setListOfRestaurant(restaurant);
         setFillterdRestaurant(restaurant);
     };
@@ -38,7 +38,7 @@ const Body = () => {
 
     return (listOfResturants.length === 0) ? <Shimmer /> : (
         <div className="body bg-[#fbf7e4]">
-            <div className="filter flex">
+            <div className="flex">
                 <div className=" m-4 p-4 space-x-5">
                     <input type="text" className="border-2 border-solid border-black" value={searchText}
                         onChange={(e) => {
@@ -71,7 +71,10 @@ const Body = () => {
             <div className="flex flex-wrap">
                 {
                     fillterdRestaurant?.map((restaurant) => (
-                        <Link key={restaurant?.info.id} to={"/restaurants/" + restaurant?.info.id}><ResturantCard resData={restaurant?.info} /></Link>
+                        <Link key={restaurant?.info.id} to={"/restaurants/" + restaurant?.info.id}>
+                            {restaurant.info.promoted ? (<RestuarantCardPromoted resData={restaurant?.info} />) :
+                                (<ResturantCard resData={restaurant?.info} />)}
+                        </Link>
                     ))
                 }
             </div>
@@ -79,4 +82,4 @@ const Body = () => {
     );
 };
 
-export default Body; 
+export default Body;
