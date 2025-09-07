@@ -19,15 +19,25 @@ const Body = () => {
     }, []);
 
     const fetchData = async function () {
+    try {
         const data = await fetch(SWIGGY_MAIN);
+        if (!data.ok) throw new Error("Network response was not ok");
         const json = await data.json();
         let restaurant = json?.data?.cards.find(
             (c) => c?.card?.card?.gridElements?.infoWithStyle?.restaurants
         )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
+        if (!restaurant) throw new Error("No restaurant data found");
         setListOfRestaurant(restaurant);
         setFillterdRestaurant(restaurant);
-    };
+    } 
+    catch (error) {
+        console.log("Fetch error:", error);
+        setListOfRestaurant([]);
+        setFillterdRestaurant([]);
+        // Optionally, set an error state and show a message to the user
+    }
+};
     const OnlineStatus = useOnlineStatus();
     if (OnlineStatus === false)
         return (
@@ -49,8 +59,6 @@ const Body = () => {
                         const filterdRestaurant = listOfResturants.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()));
 
                         setFillterdRestaurant(filterdRestaurant);
-
-
                     }}
 
                     >Search</button>
